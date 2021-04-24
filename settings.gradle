@@ -1,0 +1,7 @@
+include ':mine'
+include ':thepublic'
+include ':square'
+include ':project'
+include ':home'
+include ':app'
+rootProject.name = "WanAndroidC"

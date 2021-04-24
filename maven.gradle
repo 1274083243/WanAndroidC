@@ -1,0 +1,80 @@
+task buildAar {
+//    dependsOn gradle.task(":home:assemble")
+    println("buildAar init finish:${gradle.includedBuilds.size()}")
+    gradle.rootProject.configurations {
+
+    }
+    gradle.allprojects{
+        it.configurations.names.forEach {
+            if (it == null) {
+                println("name:==null")
+            } else {
+                println("name:$name")
+
+            }
+        }
+    }
+}
+task abc("type": Exec) {
+    workingDir "./"
+    commandLine 'gradlew', 'buildAar'
+}
+task bcd {
+    println "我是任务bcd"
+}
+static def getDependencyNode(scope, groupId, artifactId, version) {
+    Node node = new Node(null, 'dependency')
+    node.appendNode('groupId', groupId)
+    node.appendNode('artifactId', artifactId)
+    node.appendNode('version', version)
+    node.appendNode('scope', scope)
+    return node
+}
+//tasks.create("name": "a", "type": Exec) {
+//    workingDir "../"
+//    commandLine "./gradlew", "buildAar"
+//}
+
+apply plugin: 'maven-publish'
+def homeGroupId = "com.ike.home"
+def mineGroupId = "com.ike.mine"
+def versionCode = "2.0.0"
+publishing {
+    publications {
+        homeAar(MavenPublication) {
+            groupId = homeGroupId
+            artifactId = "homePlugin"
+            version = versionCode
+            println("rootDir:${rootDir}")
+            artifact("$rootDir/home/build/outputs/aar/home-debug.aar")
+            pom.withXml {
+                def root = asNode()
+                def dependencies = root.appendNode('dependencies')
+                dependencies.append(getDependencyNode('implementation', 'com.google.code.gson', 'gson', '2.8.6'))
+            }
+            println("homeAar finish")
+        }
+        mineAar(MavenPublication) {
+            groupId = mineGroupId
+            artifactId = "minePlugin"
+            version = versionCode
+            artifact("$rootDir/mine/build/outputs/aar/mine-debug.aar")
+            println("mineAar finish")
+
+        }
+//        projectAar(MavenPublicAction) {
+//
+//        }
+//        squareAar(MavenPublicAction) {
+//
+//        }
+//        thePublicAar(MavenPublicAction) {
+//
+//        }
+    }
+    repositories {
+        maven {
+            url = "./repo"
+        }
+    }
+}

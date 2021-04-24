@@ -1,0 +1,24 @@
+apply plugin: 'maven'
+uploadArchives {
+    repositories {
+        configuration =configurations.archives
+        mavenDeployer {
+            pom.project {
+                version '1.0.0'
+                artifactId "minePlugin"
+                groupId "com.ike.mine"
+                packaging "aar"
+            }
+            repository(url: uri("../repo"))
+        }
+        mavenDeployer {
+            pom.project {
+                version '1.0.0'
+                artifactId "homePlugin"
+                groupId "com.ike.home"
+                packaging "aar"
+            }
+            repository(url: uri("../repo"))
+        }
+    }
+}
