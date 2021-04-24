@@ -55,6 +55,8 @@ publishing {
             println("homeAar finish")
         }
 
+
+
         mineAar(MavenPublication) {
             groupId = mineGroupId
             artifactId = "minePlugin"
