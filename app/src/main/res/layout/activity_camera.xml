@@ -8,6 +8,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/cameraDisplay"
-        android:layout_width="50dp"
-        android:layout_height="100dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <View
+        android:layout_marginRight="40dp"
+        android:id="@+id/tempView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="255px"
+        android:layout_height="453px"/>
+    <Button
+        android:id="@+id/btnStartAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始动画"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
